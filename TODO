@@ -1,0 +1,26 @@
+to remove all the containers in once 
+====>docker container rm -f $(docker container ls -aq)
+to remove all the images in once
+===> docker image rm -f $(docker image ls -aq)
+
+docker build -t <dir> <name of the image> // to build image
+docker run -it <name of the image> // to run the container
+
+docker run -it -p 8080:8080 <name of the image> // to run the container with port
+
+docker-compose up // to run the container multiple container at once
+
+
+docker-compose build // to build the container
+docker-compose build --no-cache  // to build the container without cache
+docker-compose up -d // to run the container in background
+
+docker-compose down // to stop the container and remove it from the system
+
+
+
+/// 
+DNS, or Domain Name System, is a hierarchical and distributed naming system that translates human-readable domain names 
+(like "google.com" or "wikipedia.org") into machine-readable IP addresses (like "142.250.184.196" or "208.80.154.224"). 
+It acts like a giant phonebook for the internet, mapping easily remembered names to the numerical addresses needed to locate 
+and connect to specific online resources.
