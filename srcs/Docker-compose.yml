@@ -1,37 +1,26 @@
-version: '3.1'
+version : "3.0.0"
 
 services:
   nginx:
-    image: nginx:alpine
+    image : nginx:latest
     ports:
-      - "8080:8080"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - wordpress
-  mariadb:
-    image: mariadb
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-    volumes:
-      - mariadb:/var/lib/mysql
-  wordpress:
-    image: wordpress
-    ports:
-      - "9000:9000"
-    environment:
-      WORDPRESS_DB_HOST: "mariadb:3306"
-      WORDPRESS_DB_USER: "wordpress"
-      WORDPRESS_DB_PASSWORD: "wordpress"
-    volumes:
-      - wordpress:/var/www/html
+      - "8080"
+    container_name: nginx
+    build: ./requirements/nginx
     depends_on:
       - mariadb
-volumes:
+    restart: always
   mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    build: ./requirements/mariadb
+    ports:
+      - "3306"
+    restart: always
   wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    build: ./requirements/wordpress
+    ports:
+      - "8000"
+    restart: always
