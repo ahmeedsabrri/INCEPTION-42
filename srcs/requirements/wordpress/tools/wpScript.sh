@@ -15,9 +15,9 @@ sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|1" /etc/php/7.
 service php7.4-fpm start
 
 wp core download --allow-root --force
-wp config create --allow-root --dbname="$MARIADB_DATABASE" --dbuser="$MARIADB_USER" --dbpass="$MARIADB_PASSWORD" --dbhost=m"$MARIADB_HOST"
-wp core install --allow-root --url="$DOMAIN_NAME" --title="$MARIADB_TITLE" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASSWORD" --admin_email="$MARIADB_EMAIL" 
-wp user create   --allow-root "$WORDP_SER" "$WORDP_SER_MAIL" --user_pass="$WORDP_SER_PASS" --role=author
+wp config create --allow-root --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_USER_PASS" --dbhost="$DB_HOST"
+wp core install --allow-root --url="$URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_MAIL" 
+wp user create   --allow-root "$WP_USER" "$WP_USER_MAIL" --user_pass="$WP_USER_PASS" --role=author
 
 service php7.4-fpm stop
 php-fpm7.4 -F
