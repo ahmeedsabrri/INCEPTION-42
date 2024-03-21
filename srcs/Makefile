@@ -6,7 +6,7 @@
 #    By: asabri <asabri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 03:43:02 by asabri            #+#    #+#              #
-#    Updated: 2024/03/20 23:38:54 by asabri           ###   ########.fr        #
+#    Updated: 2024/03/20 23:59:09 by asabri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,6 @@ fclean: down
 	@docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 	@docker network rm $$(docker network ls -q) 2>/dev/null || true
 	@docker system prune -af || true
-	@rm -rf $(DB_VOLUME_DIR) $(WP_VOLUME_DIR) || true
+	@sudo rm -rf $(DB_VOLUME_DIR) $(WP_VOLUME_DIR) || true
 
 re: down all

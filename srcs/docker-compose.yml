@@ -1,29 +1,29 @@
-
-
-version: '3.9'
+version: "3.9"
 
 services:
-  
+
+#-----------------
   nginx:
-    image: nginx:ares
+    image: nginx:phobos
     build: ./requirements/nginx
     container_name: nginx
     volumes:
       - word-press:/var/www
-    networks:
-      - inception
     ports:
       - "443:443"
     depends_on:
       - wordpress
-  
-  
+    networks:
+      - inception
+    restart: on-failure
+
+#-----------------
   mariadb:
-    image: mariadb:ares
+    image: mariadb:phobos
     build: ./requirements/mariadb
     container_name: mariadb
     env_file:
-      - .env 
+      - .env
     volumes:
       - mariadb-data:/var/lib/mysql
     networks:
@@ -31,38 +31,35 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping"]
     restart: on-failure
-  
-
+#-----------------
   wordpress:
-    image: wordpress:ares
+    image: wordpress:phobos
     build: ./requirements/wordpress
     container_name: wordpress
     volumes:
       - word-press:/var/www
-    networks:
-      - inception
-    env_file:
-      - .env
     depends_on:
       mariadb:
         condition: service_healthy
+    env_file:
+      - .env
+    networks:
+      - inception
     restart: on-failure
-
 
 volumes:
   word-press:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: "${HOME}/data/wordpress"
+   driver: local
+   driver_opts:
+    type: none
+    o: bind
+    device: "${HOME}/data/word-press"
   mariadb-data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: "${HOME}/data/mariadb-data"
-
+   driver: local
+   driver_opts:
+    type: none
+    o: bind
+    device: "${HOME}/data/mariadb-data"
 
 networks:
   inception:
