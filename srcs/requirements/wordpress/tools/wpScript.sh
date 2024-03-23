@@ -1,8 +1,8 @@
 
 
-mkdir -p var/www/html
+mkdir -p var/www/wordpress
 
-cd var/www/html
+cd var/www/wordpress
 
 set -x
 

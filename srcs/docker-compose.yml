@@ -2,9 +2,8 @@ version: "3.9"
 
 services:
 
-#-----------------
   nginx:
-    image: nginx:phobos
+    image: nginx:ares
     build: ./requirements/nginx
     container_name: nginx
     volumes:
@@ -17,9 +16,9 @@ services:
       - inception
     restart: on-failure
 
-#-----------------
+
   mariadb:
-    image: mariadb:phobos
+    image: mariadb:ares
     build: ./requirements/mariadb
     container_name: mariadb
     env_file:
@@ -31,9 +30,9 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping"]
     restart: on-failure
-#-----------------
+
   wordpress:
-    image: wordpress:phobos
+    image: wordpress:ares
     build: ./requirements/wordpress
     container_name: wordpress
     volumes:
