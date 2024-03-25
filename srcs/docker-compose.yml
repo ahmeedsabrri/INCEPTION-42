@@ -16,7 +16,6 @@ services:
       - inception
     restart: on-failure
 
-
   mariadb:
     image: mariadb:ares
     build: ./requirements/mariadb
